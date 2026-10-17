@@ -1,0 +1,212 @@
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard | DeepShield AI{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="dashboard-top reveal">
+        <div>
+            <div class="eyebrow">
+                <span class="status-pulse"></span>
+                AI SECURITY WORKSPACE
+            </div>
+
+            <h1 class="dashboard-heading">
+                Welcome back,<br>
+                <span class="gradient-text">{{ user.full_name }}</span>
+            </h1>
+
+            <p class="dashboard-description">
+                Detect manipulated media and analyze digital content with your
+                multimodal deepfake detection workspace.
+            </p>
+        </div>
+
+        <div class="dashboard-shield">
+            <div class="shield-orbit orbit-one"></div>
+            <div class="shield-orbit orbit-two"></div>
+            <div class="shield-core">
+                <i class="bi bi-shield-check"></i>
+            </div>
+            <span class="orbit-dot"></span>
+        </div>
+    </div>
+
+    <div class="overview-grid reveal">
+        <div class="overview-card">
+            <div class="overview-icon icon-violet">
+                <i class="bi bi-cpu"></i>
+            </div>
+            <div>
+                <span class="overview-label">Detection Engine</span>
+                <h3>AI Powered</h3>
+                <p>Intelligent content analysis</p>
+            </div>
+        </div>
+
+        <div class="overview-card">
+            <div class="overview-icon icon-cyan">
+                <i class="bi bi-grid-1x2"></i>
+            </div>
+            <div>
+                <span class="overview-label">Supported Formats</span>
+                <h3>4 Modalities</h3>
+                <p>Text, image, audio and video</p>
+            </div>
+        </div>
+
+        <div class="overview-card">
+            <div class="overview-icon icon-green">
+                <i class="bi bi-person-check"></i>
+            </div>
+            <div>
+                <span class="overview-label">Workspace</span>
+                <h3>Personal</h3>
+                <p>Your detection tools in one place</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-heading reveal">
+        <div>
+            <span class="section-kicker">YOUR TOOLKIT</span>
+            <h2>Choose an analysis mode</h2>
+            <p>Select the type of content you want to examine.</p>
+        </div>
+
+        <div class="tool-search">
+            <i class="bi bi-search"></i>
+            <input id="toolSearch" type="search" placeholder="Find a tool..." aria-label="Search detection tools">
+        </div>
+    </div>
+
+    <div class="detection-grid">
+
+        <a href="{{ url_for('text.text_detection') }}"
+           class="detection-card card-text reveal" data-tool="text text detection writing language">
+            <div class="card-topline">
+                <div class="detection-icon">
+                    <i class="bi bi-file-earmark-text"></i>
+                </div>
+                <span class="card-arrow"><i class="bi bi-arrow-up-right"></i></span>
+            </div>
+
+            <span class="tool-number">01 / TEXT ANALYSIS</span>
+            <h3>Text Detection</h3>
+            <p>Analyze written content for patterns associated with AI-generated text.</p>
+
+            <div class="card-bottom">
+                <span><i class="bi bi-check2-circle"></i> Text input</span>
+                <span class="launch-label">Open tool <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="card-accent"></div>
+        </a>
+
+        <a href="{{ url_for('image.image_detection') }}"
+           class="detection-card card-image reveal" data-tool="image photo picture visual detection">
+            <div class="card-topline">
+                <div class="detection-icon">
+                    <i class="bi bi-image"></i>
+                </div>
+                <span class="card-arrow"><i class="bi bi-arrow-up-right"></i></span>
+            </div>
+
+            <span class="tool-number">02 / IMAGE ANALYSIS</span>
+            <h3>Image Detection</h3>
+            <p>Inspect images for potential signs of synthetic generation or manipulation.</p>
+
+            <div class="card-bottom">
+                <span><i class="bi bi-check2-circle"></i> Image upload</span>
+                <span class="launch-label">Open tool <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="card-accent"></div>
+        </a>
+
+        <a href="{{ url_for('audio.audio_detection') }}"
+           class="detection-card card-audio reveal" data-tool="audio voice speech recording detection">
+            <div class="card-topline">
+                <div class="detection-icon">
+                    <i class="bi bi-soundwave"></i>
+                </div>
+                <span class="card-arrow"><i class="bi bi-arrow-up-right"></i></span>
+            </div>
+
+            <span class="tool-number">03 / AUDIO ANALYSIS</span>
+            <h3>Audio Detection</h3>
+            <p>Examine audio recordings for possible synthetic or manipulated speech.</p>
+
+            <div class="card-bottom">
+                <span><i class="bi bi-check2-circle"></i> Audio upload</span>
+                <span class="launch-label">Open tool <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="card-accent"></div>
+        </a>
+
+        <a href="{{ url_for('video.video_detection') }}"
+           class="detection-card card-video reveal" data-tool="video movie clip face swap detection">
+            <div class="card-topline">
+                <div class="detection-icon">
+                    <i class="bi bi-camera-reels"></i>
+                </div>
+                <span class="card-arrow"><i class="bi bi-arrow-up-right"></i></span>
+            </div>
+
+            <span class="tool-number">04 / VIDEO ANALYSIS</span>
+            <h3>Video Detection</h3>
+            <p>Analyze video content for potential face swaps and deepfake manipulation.</p>
+
+            <div class="card-bottom">
+                <span><i class="bi bi-check2-circle"></i> Video upload</span>
+                <span class="launch-label">Open tool <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="card-accent"></div>
+        </a>
+
+    </div>
+
+    <div id="noToolsMessage" class="empty-search" hidden>
+        <i class="bi bi-search"></i>
+        <h3>No matching tools</h3>
+        <p>Try searching for text, image, audio, or video.</p>
+    </div>
+
+    <div class="trust-banner reveal">
+        <div class="trust-symbol"><i class="bi bi-shield-lock"></i></div>
+        <div>
+            <h3>Think critically. Verify digitally.</h3>
+            <p>AI detection results are estimates, not absolute proof. Review findings in context.</p>
+        </div>
+        <span class="trust-tag">DIGITAL TRUST</span>
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Search and filter the four detection tools.
+    const toolSearch = document.getElementById("toolSearch");
+    const toolCards = document.querySelectorAll(".detection-card");
+    const noToolsMessage = document.getElementById("noToolsMessage");
+
+    if (toolSearch) {
+        toolSearch.addEventListener("input", function () {
+            const query = this.value.trim().toLowerCase();
+            let visibleCount = 0;
+
+            toolCards.forEach(card => {
+                const matches = card.dataset.tool.includes(query);
+                card.classList.toggle("search-hidden", !matches);
+
+                if (matches) visibleCount++;
+            });
+
+            noToolsMessage.hidden = visibleCount !== 0;
+        });
+    }
+</script>
+{% endblock %}

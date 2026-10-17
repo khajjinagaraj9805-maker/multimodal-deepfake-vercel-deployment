@@ -1,0 +1,63 @@
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary and uploaded data
+uploads/*
+!uploads/.gitkeep
+reports/generated/
+
+# Model checkpoints: keep out of Git until size and hosting are planned
+# Uncomment these lines if the model folders are too large:
+# models/
+# audio_model_lab/
+
+# Large model files and archives - keep locally for now
+/models/
+/audio_model_lab/
+/deepfake.zip
+
+# Local uploads and virtual environment
+/uploads/
+/venv/
+
+# Test videos, images, and user-uploaded content
+/static/uploads/*
+!/static/uploads/.gitkeep
+
+# Additional generated data
+*.db
+*.sqlite
+*.sqlite3
+# Generated video frames
+/static/video_frames/
+
+# Backup files
+*.bak
+*.before_dhwani.bak
+# Original Git history backup
+/.git-original-backup/
+
+# Deployment-only local files
+/venv/
+/.git-original-backup/
+/config.py.local-backup
+/.env

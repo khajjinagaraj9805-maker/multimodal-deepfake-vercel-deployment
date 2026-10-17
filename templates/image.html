@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}AI Image Detection{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">
+            🖼️ AI Image Detection
+        </h2>
+        <p class="text-muted">
+            Upload an image to check whether it is AI-generated or real.
+        </p>
+    </div>
+
+    <div class="card shadow p-4">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <label class="form-label fw-bold">
+                Select Image
+            </label>
+
+            <input
+                type="file"
+                name="image"
+                class="form-control"
+                accept="image/*"
+                required>
+
+            <button
+                type="submit"
+                class="btn btn-primary mt-3 w-100">
+                🔍 Analyze Image
+            </button>
+
+        </form>
+
+        {% if result %}
+
+        <hr class="my-4">
+
+        {% if result.label == "AI GENERATED" %}
+
+        <div class="alert alert-danger text-center">
+            <h3 class="fw-bold">
+                🤖 AI GENERATED
+            </h3>
+
+            <p class="mb-1">
+                Confidence: <strong>{{ result.confidence }}%</strong>
+            </p>
+
+            <p class="mb-1">
+                AI Probability:
+                <strong>{{ result.ai_probability }}%</strong>
+            </p>
+
+            <p class="mb-0">
+                Real Probability:
+                <strong>{{ result.real_probability }}%</strong>
+            </p>
+        </div>
+
+        {% elif result.label == "REAL IMAGE" %}
+
+        <div class="alert alert-success text-center">
+            <h3 class="fw-bold">
+                ✅ REAL IMAGE
+            </h3>
+
+            <p class="mb-1">
+                Confidence: <strong>{{ result.confidence }}%</strong>
+            </p>
+
+            <p class="mb-1">
+                AI Probability:
+                <strong>{{ result.ai_probability }}%</strong>
+            </p>
+
+            <p class="mb-0">
+                Real Probability:
+                <strong>{{ result.real_probability }}%</strong>
+            </p>
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-warning text-center">
+            <h3>⚠️ {{ result.label }}</h3>
+
+            {% if result.error %}
+            <p>{{ result.error }}</p>
+            {% endif %}
+        </div>
+
+        {% endif %}
+
+        {% if filename %}
+        <div class="text-center mt-3">
+
+            <p class="text-muted">
+                Analyzed image:
+                <strong>{{ filename }}</strong>
+            </p>
+
+            <img
+                src="{{ url_for('static', filename='uploads/' + filename) }}"
+                class="img-fluid rounded shadow"
+                style="max-height: 400px;"
+                alt="Uploaded image">
+
+        </div>
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
